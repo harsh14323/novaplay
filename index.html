@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>NovaPlay Gaming Demo</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef0f7;color:#1d2330;font-family:Arial,system-ui,sans-serif}
+.app{max-width:520px;margin:auto;min-height:100vh;background:#f7f8fc;padding-bottom:76px}
+.top{height:68px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid #e4e6ec;position:sticky;top:0;z-index:5}
+.logo{font-size:24px;font-weight:900;color:#f45a61}.logo span{font-size:13px;color:#555;display:block}
+.balance{font-size:13px;color:#555}.balance b{display:block;font-size:17px;color:#202431;text-align:right}
+.notice{margin:10px 12px;padding:11px 13px;background:#fff;border-radius:12px;color:#606879;font-size:11px;box-shadow:0 1px 5px #0000000c}
+.banner{margin:10px 12px;height:155px;border-radius:17px;padding:20px;color:#fff;background:linear-gradient(135deg,#a30d19,#ff5b2e 55%,#60101a);overflow:hidden;position:relative}
+.banner h1{font-size:29px;margin:8px 0}.banner p{font-size:12px;max-width:210px;line-height:1.4}.ball{position:absolute;right:-18px;bottom:-18px;font-size:125px;opacity:.25}
+.wallet{margin:10px 12px;background:#fff;border-radius:15px;padding:14px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 6px #0000000b}.wallet small{display:block;color:#727989}.wallet strong{font-size:25px}
+.actions{display:flex;gap:8px}.actions button{border:0;border-radius:11px;padding:12px 15px;color:#fff;font-weight:800}.demo{background:#ffb34e}.info{background:#ff5b61}
+.tabs{display:flex;gap:8px;overflow:auto;padding:8px 12px}.tabs button{white-space:nowrap;border:0;background:#fff;padding:11px 14px;border-radius:11px;color:#687083;font-weight:700}.tabs .on{background:#ff5b61;color:#fff}
+.section{padding:8px 12px}.section h2{font-size:18px;margin:8px 0 12px}.games{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.game{border:0;text-align:left;border-radius:15px;min-height:105px;padding:14px;color:#fff;font-weight:900;font-size:18px;background:linear-gradient(135deg,#ff6464,#ef2e70)}.game:nth-child(2){background:linear-gradient(135deg,#6c43e8,#a329e9)}.game:nth-child(3){background:linear-gradient(135deg,#20253b,#b51e42)}.game:nth-child(4){background:linear-gradient(135deg,#13a28c,#1675b8)}
+.game small{display:block;font-size:10px;margin-top:8px;opacity:.85}
+.panel{margin-top:12px;background:#fff;border-radius:15px;padding:14px}.panel h3{margin:0 0 10px}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.choices button{border:0;border-radius:12px;padding:14px 5px;color:#fff;font-weight:900}.red{background:#ff5065}.green{background:#18b97b}.violet{background:#8757df}.selected{outline:3px solid #202431}.stake{display:flex;gap:8px;margin-top:10px}.stake input{width:100%;border:1px solid #dfe2e9;border-radius:10px;padding:12px}.play{border:0;border-radius:10px;background:#202431;color:#fff;font-weight:800;padding:0 15px}.result{margin-top:10px;padding:10px;border-radius:10px;background:#f4f5f8;text-align:center;font-size:12px}.history div{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #eee;font-size:12px}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);height:67px;background:#fff;border-top:1px solid #e1e3e9;display:grid;grid-template-columns:repeat(4,1fr);z-index:8}.bottom button{border:0;background:none;color:#a0a7b5;font-size:11px}.bottom .active{color:#ff5861;font-weight:800}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="logo">NOVA<span>PLAY GAMING DEMO</span></div><div class="balance">Demo Wallet<b id="bal">₹5,000</b></div></header>
+<div class="notice">🎮 Demo gaming site — all balances and results are virtual points. No real-money transactions.</div>
+<section class="banner"><h1>PLAY & WIN</h1><p>Explore colourful mini games in a mobile-first gaming lobby.</p><div class="ball">🎮</div></section>
+<section class="wallet"><div><small>Virtual wallet balance</small><strong id="wallet">5,000</strong></div><div class="actions"><button class="demo" onclick="addDemo()">+ Demo</button><button class="info" onclick="alert('Demo mode only')">Info</button></div></section>
+<div class="tabs"><button class="on">🏠 Lobby</button><button>🎮 Mini Games</button><button>🎰 Slots</button><button>🃏 Card</button></div>
+<section class="section"><h2>⭐ Recommended Games</h2><div class="games"><button class="game" onclick="document.getElementById('game').scrollIntoView()">🎡 Colour Rush<small>30 SEC • DEMO</small></button><button class="game">🎁 Lucky Wheel<small>VIRTUAL PLAY</small></button><button class="game">🚀 Sky Ride<small>ARCADE DEMO</small></button><button class="game">🃏 Card Arena<small>COMING SOON</small></button></div>
+<div class="panel" id="game"><h3>Colour Rush <small style="color:#8a91a0">• virtual points</small></h3><div class="choices"><button class="red" onclick="pick('red',this)">RED<br><small>2×</small></button><button class="green" onclick="pick('green',this)">GREEN<br><small>2×</small></button><button class="violet" onclick="pick('violet',this)">VIOLET<br><small>4×</small></button></div><div class="stake"><input id="stake" type="number" min="1" max="1000" value="100"><button class="play" onclick="play()">PLAY</button></div><div class="result" id="result">Choose a colour and play a demo round.</div></div>
+<div class="panel history"><h3>Recent Activity</h3><div id="history">No games played yet.</div></div></section>
+<nav class="bottom"><button class="active">⌂<br>Home</button><button>◉<br>Activity</button><button>🎁<br>Promotion</button><button>☻<br>Account</button></nav>
+</div>
+<script>
+let balance=5000,choice=null,round=1000;
+const history=[];
+function update(){document.getElementById('bal').textContent='₹'+balance.toLocaleString();document.getElementById('wallet').textContent=balance.toLocaleString()}
+function pick(c,b){choice=c;document.querySelectorAll('.choices button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected')}
+function addDemo(){balance+=500;update();alert('500 virtual demo points added.')}
+function play(){if(!choice)return alert('Select a colour first.');let n=Number(document.getElementById('stake').value);if(n<1||n>1000)return alert('Demo stake: 1–1000 points.');if(n>balance)return alert('Not enough demo points.');balance-=n;let r=['red','green','violet'][Math.floor(Math.random()*3)];let win=r===choice;let payout=win?n*(r==='violet'?4:2):0;balance+=payout;round++;history.unshift({round,choice,result:r,n,win,payout});document.getElementById('result').innerHTML='Result: <b>'+r.toUpperCase()+'</b> — '+(win?'🎉 You won '+payout+' demo points!':'You lost this demo round.');document.getElementById('history').innerHTML=history.slice(0,8).map(x=>'<div><span>#'+x.round+' • '+x.choice.toUpperCase()+'</span><b style="color:'+(x.win?'#16a66d':'#e34f62')+'">'+(x.win?'+'+x.payout:'-'+x.n)+'</b></div>').join('');update()}
+update();
+</script>
+</body>
+</html>
